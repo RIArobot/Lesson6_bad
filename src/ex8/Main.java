@@ -3,19 +3,19 @@ package ex8;
 import java.util.List;
 import java.util.ArrayList;
 
-// Нарушение SRP (Single Responsibility Principle)
+
 class EmployeeManager {
     private List<Employee> employees = new ArrayList<>();
 
-    // Нарушение DIP (Dependency Inversion Principle)
+
     private DatabaseConnection dbConnection = new MySQLConnection();
 
-    // Нарушение KISS и YAGNI (сложная логика там, где можно проще)
+
     public void processEmployeeData(Employee emp) {
         if (emp != null && emp.getName() != null && !emp.getName().isEmpty()) {
             if (emp.getAge() > 18 && emp.getAge() < 65) {
                 if (emp.getSalary() > 0) {
-                    // Нарушение DRY (дублирование кода)
+
                     for (Employee e : employees) {
                         if (e.getId() == emp.getId()) {
                             System.out.println("Employee exists");
@@ -23,7 +23,7 @@ class EmployeeManager {
                         }
                     }
 
-                    // Нарушение OCP (закрыто для расширения)
+
                     if (dbConnection.isConnected()) {
                         dbConnection.save(emp);
                         employees.add(emp);
@@ -43,17 +43,17 @@ class EmployeeManager {
         }
     }
 
-    // Нарушение ISP (ненужный метод)
+
     public void generateReport(String type) {
         if (type.equals("PDF")) {
-            // сложная логика генерации PDF
+
         } else if (type.equals("Excel")) {
-            // сложная логика генерации Excel
+
         }
     }
 
     private void sendNotification(Employee emp) {
-        // Нарушение DRY (дублирование проверки)
+
         if (emp != null && emp.getEmail() != null && !emp.getEmail().isEmpty()) {
             System.out.println("Sending email to " + emp.getEmail());
         }
@@ -64,7 +64,7 @@ class EmployeeManager {
     }
 }
 
-// Нарушение LSP (неправильная иерархия)
+
 class Employee {
     private int id;
     private String name;
@@ -114,7 +114,7 @@ class Employee {
 }
 
 class Manager extends Employee {
-    // Нарушение LSP (добавляет новое исключение)
+
     @Override
     public void setSalary(double salary) {
         if (salary < 5000) {
@@ -124,7 +124,7 @@ class Manager extends Employee {
     }
 }
 
-// Жесткая зависимость (нарушение DIP)
+
 class DatabaseConnection {
     boolean isConnected() { return true; }
     void save(Employee emp) {}
