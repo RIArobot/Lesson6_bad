@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 class OrderProcessor {
     public void processOrder(String orderId) {
         try {
-            // Логика обработки заказа...123
+            // Логика обработки заказа...321
             System.out.println("Заказ " + orderId + " обработан.");
         } catch (Exception e) {
             String errorTime = LocalDateTime.now().toString();
